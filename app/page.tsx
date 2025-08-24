@@ -6,84 +6,13 @@ import { loadSlim } from "@tsparticles/slim";
 import { useEffect, useMemo, useState } from "react";
 import type { Container, ISourceOptions } from "@tsparticles/engine";
 import "@/styles/Screen.css"
+import Image_Carasouel from "@/components/Image_Carasouel";
 
 
 
 export default function Home() {
 
 
-  const [count, setCount] = useState(0)
-
-
-  const [init, setInit] = useState(false);
-
-
-  const particlesLoaded = async (container?: Container): Promise<void> => {
-    console.log("Particles loaded:", container);
-  };
-
-
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
-  }, []);
-
-  const options: ISourceOptions = useMemo(
-    () => ({
-      background: {
-        opacity: 0.5,
-      },
-      fpsLimit: 120,
-      particles: {
-        color: {
-          value: "#820202",
-        },
-        links: {
-          color: "#820202",
-          distance: 150,
-          enable: true,
-          opacity: 0.6,
-          width: 7,
-        },
-        move: {
-          direction: "none",
-          enable: true,
-          outModes: {
-            default: "bounce",
-          },
-          random: true,
-          speed: 1,
-          straight: false,
-        },
-        number: {
-          density: {
-            enable: true,
-          },
-          value: 60,
-        },
-        opacity: {
-          value: 0.3,
-        },
-        shape: {
-          type: "square"
-        },
-        size: {
-          value: { min: 3, max: 10 },
-        },
-        rotate: {
-          value: { min: 0, max: 360 },
-        }
-      },
-      spawn: {
-        position: "outside", // Forces particles to start off-screen
-      },
-      detectRetina: true,
-    }),
-    [],
-  );
 
   const titleFont = "main-title-font md:tracking-widest "
   const secondaryFont = ""
@@ -99,82 +28,94 @@ export default function Home() {
   return (
 
     <>
-      <Particles
-        id="tsparticles"
-        particlesLoaded={particlesLoaded}
-        options={options}
-      />
 
       <div className='flex flex-col items-center justify-center'>
 
-        <Navbar />
 
 
 
         <div className=" z-10 flex flex-col items-center justify-center gap-10 text-center px-[5vw] mt-30">
-          <div className="w-full px-4 sm:px-6 md:px-10 lg:px-12 z-10">
-            <div className="w-full max-w-[95vw] sm:max-w-2xl mx-auto rounded-3xl border-black border-4 shadow-lg p-2 bg-gray-700 overflow-hidden" >
-              <div className="bg-gray-800 rounded-3xl font-mono text-sm text-primary/90 p-3 sm:p-4 md:p-6 space-y-4">
-                <div className="bg-black border p-4 sm:p-6 border-primary/50 overflow-hidden shadow-lg crt">
+          <div className="w-full max-w-[95vw] sm:max-w-5xl rounded-3xl border-black border-4 shadow-lg p-2 bg-gray-700 overflow-hidden" >
+            <div className="bg-gray-800 rounded-3xl font-mono text-sm text-primary/90 p-3 sm:p-4 md:p-6 space-y-4">
+              <div className="bg-black border p-4 sm:p-6 border-primary/50 overflow-hidden shadow-lg crt">
+                {/* Power LED */}
+                {/* <div className="absolute top-1 left-1 w-3 h-3 rounded-full bg-green-500 animate-pulse"></div> */}
+                <div className="flex flex-row items-center justify-center space-x-8 p-6">
+                  {/* Profile Image */}
 
-                  <div className="flex flex-row items-center justify-center space-x-8 p-6">
-                    {/* Profile Image */}
-                    <div className="hidden md:block crt rounded-xl ">
-                      <img
-                        src="/image.png"
-                        alt="Shrey Patel"
-                        className="md:h-78 md:w-200 rounded-2xl shadow-lg object-cover"
-                      />
+                  {/* Screen */}
+                  <div className="relative hidden md:inline-block  bg-black rounded-lg border border-gray-700 shadow-inner p-4  items-center justify-center">
+                    <img
+                      src="/image.png"
+                      alt="Shrey Patel"
+                      className="rounded-md object-cover md:w-200 md:h-130"
+                    />
+
+                  </div>
+
+
+                  {/* Text Content */}
+                  <div className="fle flex-row">
+                    <div className="max-w-xl md:text-left text-center mb-16 ">
+                      <div className="flex-1 text-center md:text-left space-y-3 font-mono">
+                        <h1 className="text-2xl md:text-4xl font-bold text-green-400">Shrey Patel</h1>
+                        <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+                          Computer Science student at the University of Manchester, passionate about hardware systems, dynamic programming, and full-stack web development.
+                        </p>
+
+                      </div>
+
                     </div>
 
-                    {/* Text Content */}
-                    <div className="max-w-xl md:text-left text-center ">
-                      <h1 className="md:text-5xl text-3xl font-bold">Shrey Patel</h1>
-                      <br />
-                      <p className="text-white md:text-lg  text-xs  leading-relaxed">
-                        Computer Science student at the University of Manchester, with a passion for hardware systems, dynamic programming, and full-stack web development.
-                      </p>
+                    <Image_Carasouel />
 
-                    </div>
                   </div>
                 </div>
               </div>
-              <div className="flex flex-row items-center justify-between gap-3 w-full max-w-full scale-[0.7] sm:scale-100 transition-transform duration-300 p-4">
-
-                {/* Left buttons */}
-                <div className="hidden md:flex  flex-col justify-center items-center gap-2">
-                  <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-red-500"></div>
-                  <div className="flex flex-row gap-1">
-                    <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-yellow-500"></div>
-                    <div className="w-4 h-4 md:w-6 md:h-6 rounded-full "></div>
-                    <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-green-500"></div>
-                  </div>
-                  <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-blue-500"></div>
-                </div>
-
-                {/* Label */}
-                <h1 className={`${titleFont} text-[14px] md:text-[20px] font-bold mt-4 md:mt-20 hidden md:flex`}>ShreyBot3000</h1>
-
-                {/* Right buttons */}
-                <div className="hidden md:flex flex-col justify-center items-center gap-2">
-                  <div className="flex flex-row gap-2">
-                    <div className="w-3 h-3 md:w-6 md:h-6 rounded-full"></div>
-                    <div className="w-3 h-3 md:w-6 md:h-6 rounded-full bg-gray-500"></div>
-                  </div>
-                  <div className="flex flex-row gap-2">
-                    <div className="w-3 h-3 md:w-6 md:h-6 rounded-full bg-gray-500"></div>
-                    <div className="w-3 h-3 md:w-6 md:h-6 rounded-full"></div>
-                  </div>
-                </div>
-
-              </div>
-
             </div>
+
+
           </div>
         </div>
-
       </div>
+
+
     </>
+
+
+
+
+    //  <div className="flex flex-row items-center justify-between gap-3 w-full max-w-full scale-[0.7] sm:scale-100 transition-transform duration-300 p-4">
+
+    //                 {/* Left buttons */}
+    //                 <div className="hidden md:flex  flex-col justify-center items-center gap-2">
+    //                   <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-red-500"></div>
+    //                   <div className="flex flex-row gap-1">
+    //                     <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-yellow-500"></div>
+    //                     <div className="w-4 h-4 md:w-6 md:h-6 rounded-full "></div>
+    //                     <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-green-500"></div>
+    //                   </div>
+    //                   <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-blue-500"></div>
+    //                 </div>
+
+    //                 {/* Label */}
+    //                 <h1 className={`${titleFont} text-[14px] md:text-[20px] font-bold mt-4 md:mt-20 hidden md:flex`}>ShreyBot3000</h1>
+
+    //                 {/* Right buttons */}
+    //                 <div className="hidden md:flex flex-col justify-center items-center gap-2">
+    //                   <div className="flex flex-row gap-2">
+    //                     <div className="w-3 h-3 md:w-6 md:h-6 rounded-full"></div>
+    //                     <div className="w-3 h-3 md:w-6 md:h-6 rounded-full bg-gray-500"></div>
+    //                   </div>
+    //                   <div className="flex flex-row gap-2">
+    //                     <div className="w-3 h-3 md:w-6 md:h-6 rounded-full bg-gray-500"></div>
+    //                     <div className="w-3 h-3 md:w-6 md:h-6 rounded-full"></div>
+    //                   </div>
+    //                 </div>
+
+    //               </div>
+
+
     // <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
     //   <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
     //     <Image
