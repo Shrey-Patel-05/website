@@ -1,34 +1,3 @@
-
-// import React from 'react'
-
-
-// const Navbar = () => {
-//     const buttons = [
-//         { label: "Home", path: "/" },
-//         { label: "Projects", path: "/projects" },
-//     ];
-//     return (
-
-//         <>
-//             <nav className="fixed top-[-22] left-0 mt-8 z-30  w-full  hidden md:flex justify-center  text-sm">
-//                 <div className="flex flew-row  w-full h-20 bg-red-400 items-center ">
-//                     {buttons.map((button, index) => (
-//                         <a href={button.path} key={index} className="space-2 p-2 ">  {button.label} </a>
-//                     ))}
-
-//                 </div>
-
-//             </nav>
-//         </>
-
-
-
-//     )
-// }
-
-// export default Navbar
-
-
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -69,84 +38,28 @@ function ResponsiveAppBar() {
   const buttons = [
     { label: "Home", path: "/" },
     { label: "Projects", path: "/projects" },
+    { label: "Hobbies", path: "/hobbies" },
+    { label: "CV", path: "/cv" },
   ];
 
   return (
-    <AppBar position="static" className="bg-amber-200" sx={{ backgroundColor: "#374151" }}>
+    <AppBar position="static" className="bg-amber-200 max-w-full" sx={{ backgroundColor: "#374151" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-
-
-          <div className="flex-grow flex md:hidden">
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{ display: { xs: 'block', md: 'none' } }}
-            >
-
-              {buttons.map((button, index) => (
-                // <a href={button.path} key={index} className="space-2 p-2 ">  {button.label} </a>
-                <MenuItem key={index} href={button.path}
-                  sx={{ my: 2, color: 'black', display: 'block', fontFamily: 'var(--font-geist-mono)', }}
-                >
-                  {button.label}
-
-                </MenuItem>
-              ))}
-            </Menu>
-          </div>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'var(--font-geist-sans)',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box className="flex flex-wrap justify-center" sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
             {buttons.map((button, index) => (
               // <a href={button.path} key={index} className="space-2 p-2 ">  {button.label} </a>
-              <Button
-                key={index}
-                href={button.path}
-                component="a"
-                sx={{ my: 2, color: 'white', display: 'block', fontFamily: 'var(--font-geist-mono)', }}
-              >
-                {button.label}
-              </Button>
+              <div key={index} className='flex flex-row text-center items-center justify-center'>
+                <Button 
+                  href={button.path}
+                  component="a"
+                  className=' md:text-sm !text-xl'
+                  sx={{ my: 2, color: 'white', display: 'block', fontFamily: 'var(--font-conthrax)', }}
+                >
+                  {button.label}
+                </Button>
+                {buttons.length - 1 != index && <p>|</p>}
+              </div>
             ))}
 
           </Box>

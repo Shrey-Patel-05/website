@@ -67,16 +67,21 @@ export default function Home() {
                             <a href="https://github.com/shrey-patel-05" target="_blank" className="text-gray-300 text-sm md:text-base underline"> <img src="/github.png" className="w-20 h-20"></img></a>
                             <a href="https://github.com/shrey-patel-05" target="_blank" className="text-green-300 text-sm md:text-base underline"> Github</a>
                           </div>      
-                            <div className="flex flex-col items-center text-center">
+                          <div className="flex flex-col items-center text-center">
                             <a href="https://github.com/shrey-patel-05" target="_blank" className="text-gray-300 text-sm md:text-base underline"> <img src="/cv.png" className="w-20 h-20"></img></a>
                             <a href="https://github.com/shrey-patel-05" target="_blank" className="text-gray-300 text-sm md:text-base underline"> CV</a>
+                          </div>   
+                          <div className="flex flex-col items-center text-center">
+                            <a href="/projects"  className="text-gray-300 text-sm md:text-base underline"> <img src="/project.png" className="w-20 h-20"></img></a>
+                            <a href="/projects"  className="text-cyan-200 text-sm md:text-base underline"> Projects</a>
                           </div>
+                          
                         </div>
                       </div>
 
                     </div>
 
-
+                  </div>
                   </div>
                 </div>
               </div>
@@ -84,7 +89,6 @@ export default function Home() {
 
 
           </div>
-        </div>
 
 
 

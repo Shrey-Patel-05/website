@@ -55,11 +55,11 @@ const Image_Carasouel = ({ members }) => {
 
   return (
     <section className="w-full  flex items-center justify-center">
-      <div className="max-w-7xl mx-auto text-center px-4">
+      <div className="  text-center px-4">
         <div className="flex flex-col items-center justify-center">
           <div className="flex items-center justify-center w-full gap-4">
             {/* Left Arrow */}
-            <img className="p-4 w-20 h-20  mx-3  text-8xl font-light select-none bg-gray-800 rounded-2xl hover:scale-105 transition-colors duration-300" src="/arrowpast.png" onClick={() => { goToPrevious() }}></img>
+            <img className="p-4 w-20 h-20  mx-3  text-8xl font-light select-none  rounded-2xl hover:scale-105 transition-colors duration-300" src="/arrowpast.png" onClick={() => { goToPrevious() }}></img>
 
             {/* Image List */}
             {itemsToShow == 1 &&
@@ -98,7 +98,7 @@ const Image_Carasouel = ({ members }) => {
                     <img
                       src={members[plusSlides]?.image}
                       alt={members[plusSlides]?.name || 'Member'}
-                      className="max-w-full max-h-full object-contain"
+                      className="max-w-full max-h-full w-full h-72 object-cover"
                       loading="lazy"
                     />
                     <ImageListItemBar
@@ -115,51 +115,51 @@ const Image_Carasouel = ({ members }) => {
                   <ImageListItem>
                     <div className="relative rounded-2xl ml-5 overflow-hidden shadow-lg transform transition-transform duration-300 bg-white w-full h-full hover:scale-105 flex items-center justify-center">
                       <img
-                        src={members[plusSlides+1]?.image}
-                        alt={members[plusSlides+1]?.name || 'Member'}
-                        className="max-w-full max-h-full object-contain"
+                        src={members[plusSlides + 1]?.image}
+                        alt={members[plusSlides + 1]?.name || 'Member'}
+                        className="max-w-full max-h-full w-full h-72 object-cover"
                         loading="lazy"
                       />
                       <ImageListItemBar
                         style={{ height: '38%', fontFamily: 'var(--conthrax)' }}
                         className="absolute bottom-0 left-0 right-0 !bg-black/90 p-6 !rounded-b-2xl !text-3xl"
-                        title={members[plusSlides+1]?.name}
-                        subtitle={members[plusSlides+1]?.role}
+                        title={members[plusSlides + 1]?.name}
+                        subtitle={members[plusSlides + 1]?.role}
                       />
                     </div>
                   </ImageListItem>
+                )}
+              </ImageList>
             )}
-          </ImageList>
-            )}
 
 
 
-          {/* Right Arrow */}
+            {/* Right Arrow */}
 
-          <img className="p-4 w-20 h-20  mx-3 rotate-180 text-8xl font-light select-none bg-gray-800 rounded-2xl hover:scale-105 transition-colors duration-300" src="/arrowpast.png" onClick={() => { goToNext() }}></img>
+            <img className="p-4 w-20 h-20  mx-3 rotate-180 text-8xl font-light select-none  rounded-2xl hover:scale-105 transition-colors duration-300" src="/arrowpast.png" onClick={() => { goToNext() }}></img>
+
+
+          </div>
+          {/* Slide Indicators */}
+          {members.length > itemsToShow && (
+            <div className="flex gap-2 mt-6">
+              {Array.from({ length: maxSlide + 1 }, (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setPlusSlides(index)}
+                  className={`w-3 h-3 rounded-full transition-all ${plusSlides === index
+                    ? 'bg-green-600 scale-125'
+                    : 'bg-gray-400 hover:bg-gray-300'
+                    }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          )}
 
 
         </div>
-        {/* Slide Indicators */}
-        {members.length > itemsToShow && (
-          <div className="flex gap-2 mt-6">
-            {Array.from({ length: maxSlide + 1 }, (_, index) => (
-              <button
-                key={index}
-                onClick={() => setPlusSlides(index)}
-                className={`w-3 h-3 rounded-full transition-all ${plusSlides === index
-                  ? 'bg-green-600 scale-125'
-                  : 'bg-gray-400 hover:bg-gray-300'
-                  }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        )}
-
-
       </div>
-    </div>
     </section >
   );
 };
