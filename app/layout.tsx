@@ -1,6 +1,8 @@
 "use client"
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
+
+// import { Geist, Geist_Mono, Rubik Doodle Shadow } from "next/font/google";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
@@ -9,17 +11,28 @@ import { useEffect, useMemo, useState } from "react";
 import type { Container, ISourceOptions } from "@tsparticles/engine";
 import "./globals.css";
 
+import { Geist, Geist_Mono, Rubik_Doodle_Shadow } from "next/font/google";
+
 const geistSans = Geist({
-  variable: "--font-geist-sans",
   subsets: ["latin"],
+  variable: "--font-geist-sans",
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
+  variable: "--font-geist-mono",
 });
 
+const rubikDoodleShadow = Rubik_Doodle_Shadow({
+  subsets: ["latin"],
+  weight: "400", // this font has only one weight
+  variable: "--font-rubik-doodle-shadow",
+});
 
+// const  conthrax = localFont({
+//   src: "../public/fonts/conthrax.otf",
+//   variable: "--font-conthrax",
+// });
 
 
 
@@ -103,16 +116,17 @@ export default function RootLayout({
   );
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${rubikDoodleShadow.variable} antialiased`}
       >
         <Particles
           id="tsparticles"
           particlesLoaded={particlesLoaded}
           options={options}
+          className="fixed top-0 left-0 w-full h-full -z-10"
         />
-            <Navbar />
+        <Navbar />
 
         {children}
       </body>

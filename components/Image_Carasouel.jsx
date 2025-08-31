@@ -7,88 +7,160 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 
 
 
-const Image_Carasouel = () => {
-  const members = [{ "name": "Sean bechofer", "image": "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg", "role": "Lead dev", "linkedin": "", "github": "" }, { "name": "Shrey Patel", "image": "https://media.istockphoto.com/id/1364917563/photo/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=NtM9Wbs1DBiGaiowsxJY6wNCnLf0POa65rYEwnZymrM=", "role": "dev", "linkedin": "", "github": "" }, { "name": "Shrey Patel", "image": "https://media.istockphoto.com/id/1364917563/photo/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=NtM9Wbs1DBiGaiowsxJY6wNCnLf0POa65rYEwnZymrM=", "role": "dev", "linkedin": "", "github": "" }, { "name": "Shrey Patel", "image": "https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg", "role": "dev", "linkedin": "", "github": "" }, { "name": "Shrey Patel", "image": "https://media.istockphoto.com/id/1364917563/photo/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=NtM9Wbs1DBiGaiowsxJY6wNCnLf0POa65rYEwnZymrM=", "role": "dev", "linkedin": "", "github": "" }, { "name": "Shrey Patel", "image": "https://media.istockphoto.com/id/1364917563/photo/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=NtM9Wbs1DBiGaiowsxJY6wNCnLf0POa65rYEwnZymrM=", "role": "dev", "linkedin": "", "github": "" }, { "name": "Shrey Patel", "image": "https://media.istockphoto.com/id/1364917563/photo/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=NtM9Wbs1DBiGaiowsxJY6wNCnLf0POa65rYEwnZymrM=", "role": "dev", "linkedin": "", "github": "" }, { "name": "Shrey Patel", "image": "https://media.istockphoto.com/id/1364917563/photo/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=NtM9Wbs1DBiGaiowsxJY6wNCnLf0POa65rYEwnZymrM=", "role": "dev", "linkedin": "", "github": "" }, { "name": "Shrey Patel", "image": "https://media.istockphoto.com/id/1364917563/photo/businessman-smiling-with-arms-crossed-on-white-background.jpg?s=612x612&w=0&k=20&c=NtM9Wbs1DBiGaiowsxJY6wNCnLf0POa65rYEwnZymrM=", "role": "dev", "linkedin": "", "github": "" }];
+const Image_Carasouel = ({ members }) => {
+
   const [plusSlides, setplusSlides] = useState(0);
+  const [itemsToShow, setItemsToShow] = useState(2);
+
+  const goToPrevious = () => {
+    setplusSlides((prev) => prev <= 0 ? Math.max(0, members.length - itemsToShow) : prev - 1);
+  };
+
+  const maxSlide = Math.max(0, members.length - itemsToShow);
+
+  const goToNext = () => {
+    setplusSlides((prev) => {
+      const maxSlide = Math.max(0, members.length - itemsToShow);
+      return prev >= maxSlide ? 0 : prev + 1;
+    });
+  };
 
 
-  // Will move to next image every 6 seconds
+  // // Will move to next image every 6 seconds
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     const maxSlide = Math.max(0, members.length - itemsToShow);
+  //     setplusSlides((prev) => {
+  //       const maxSlide = Math.max(0, members.length - itemsToShow);
+  //       return prev >= maxSlide ? 0 : prev + 1;
+  //     });
+  //   }, 10000);
+
+  //   return () => clearInterval(interval);
+  // }, [members.length]);
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setplusSlides((prev) => (prev + 1) % members.length);
-    }, 6000);
+    const handleResize = () => {
+      setItemsToShow(window.innerWidth < 768 ? 1 : 2);
+    };
 
-    return () => clearInterval(interval);
-  }, [members.length]);
-
+    handleResize(); // run on mount
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
 
 
 
 
   return (
-    <section className=" w-full">
+    <section className="w-full  flex items-center justify-center">
       <div className="max-w-7xl mx-auto text-center px-4">
         <div className="flex flex-col items-center justify-center">
           <div className="flex items-center justify-center w-full gap-4">
             {/* Left Arrow */}
-            <button
-              onClick={() => setplusSlides(Math.max(plusSlides - 1, 0))}
-              className="text-3xl font-bold text-black bg-gray-600 hover:text-gray-400 transition rounded-2xl p-1"
-            >
-              &#10094;
-            </button>
+            <img className="p-4 w-20 h-20  mx-3  text-8xl font-light select-none bg-gray-800 rounded-2xl hover:scale-105 transition-colors duration-300" src="/arrowpast.png" onClick={() => { goToPrevious() }}></img>
 
             {/* Image List */}
-            <ImageList
-              sx={{
-                width: '100%',
-                maxWidth: '100%',
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-                gap: 16
-              }}
-            >
-              <ImageListItem className=''>
-                <img
-                  src={members[plusSlides].image}
-                  className=" object-cover w-full rounded-md"
-                  loading="lazy"
-                />
-                <ImageListItemBar
-                 style={{ height: '38%' }}
-                  title={members[plusSlides].name}
-                />
-              </ImageListItem>
-              {plusSlides <= members.length - 2 &&
+            {itemsToShow == 1 &&
 
-                <ImageListItem className=''>
+              <div className="flex-1 max-w-md mx-8">
+                <div className="relative rounded-2xl shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
                   <img
-                    src={members[plusSlides + 1].image}
-                    className=" object-cover w-full rounded-md"
+                    src={members[plusSlides]?.image}
+                    className="w-full h-96 object-cover"
                     loading="lazy"
                   />
-                  <ImageListItemBar
-                    style={{ height: '38%' }}
-                    title={members[plusSlides + 1].name}
-                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-black/80 p-6">
+                    <h3 className="text-white font-bold text-xl mb-1">
+                      {members[plusSlides]?.name}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+
+            }
+
+            {/* First Image */}
+            {itemsToShow == 2 && (
+              <ImageList className='flex flex-row items-center'
+                sx={{
+                  width: '100%',
+                  maxWidth: '100%',
+                  display: 'grid',
+                  gridTemplateColumns: itemsToShow === 1 ? '1fr' : 'repeat(2, 1fr)',
+                  gap: 16,
+                }}
+              >
+                {/* First Image */}
+                <ImageListItem>
+                  <div className="relative rounded-2xl overflow-hidden shadow-lg transform transition-transform duration-300 bg-white w-full h-full hover:scale-105 flex items-center justify-center ">
+                    <img
+                      src={members[plusSlides]?.image}
+                      alt={members[plusSlides]?.name || 'Member'}
+                      className="max-w-full max-h-full object-contain"
+                      loading="lazy"
+                    />
+                    <ImageListItemBar
+                      style={{ height: '38%', fontFamily: 'var(--conthrax)' }}
+                      className="absolute bottom-0 left-0 right-0 !bg-black/90 p-6 !rounded-b-2xl !text-3xl"
+                      title={members[plusSlides]?.name}
+                      subtitle={members[plusSlides]?.role}
+                    />
+                  </div>
                 </ImageListItem>
-              }
+
+                {/* Second Image */}
+                {plusSlides < members.length - 1 && (
+                  <ImageListItem>
+                    <div className="relative rounded-2xl ml-5 overflow-hidden shadow-lg transform transition-transform duration-300 bg-white w-full h-full hover:scale-105 flex items-center justify-center">
+                      <img
+                        src={members[plusSlides+1]?.image}
+                        alt={members[plusSlides+1]?.name || 'Member'}
+                        className="max-w-full max-h-full object-contain"
+                        loading="lazy"
+                      />
+                      <ImageListItemBar
+                        style={{ height: '38%', fontFamily: 'var(--conthrax)' }}
+                        className="absolute bottom-0 left-0 right-0 !bg-black/90 p-6 !rounded-b-2xl !text-3xl"
+                        title={members[plusSlides+1]?.name}
+                        subtitle={members[plusSlides+1]?.role}
+                      />
+                    </div>
+                  </ImageListItem>
+            )}
+          </ImageList>
+            )}
 
 
-            </ImageList>
 
-            {/* Right Arrow */}
-            <button
-              onClick={() => setplusSlides(Math.min(plusSlides + 1, members.length - 1))}
-              className="text-3xl font-bold text-black hover:text-gray-400 bg-gray-600 transition p-1 rounded-2xl"
-            >
-              &#10095;
-            </button>
-          </div>
+          {/* Right Arrow */}
+
+          <img className="p-4 w-20 h-20  mx-3 rotate-180 text-8xl font-light select-none bg-gray-800 rounded-2xl hover:scale-105 transition-colors duration-300" src="/arrowpast.png" onClick={() => { goToNext() }}></img>
+
+
         </div>
+        {/* Slide Indicators */}
+        {members.length > itemsToShow && (
+          <div className="flex gap-2 mt-6">
+            {Array.from({ length: maxSlide + 1 }, (_, index) => (
+              <button
+                key={index}
+                onClick={() => setPlusSlides(index)}
+                className={`w-3 h-3 rounded-full transition-all ${plusSlides === index
+                  ? 'bg-green-600 scale-125'
+                  : 'bg-gray-400 hover:bg-gray-300'
+                  }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
+
+
       </div>
-    </section>
+    </div>
+    </section >
   );
 };
 

@@ -29,12 +29,12 @@ export default function Home() {
 
     <>
 
-      <div className='flex flex-col items-center justify-center'>
 
 
 
 
-        <div className=" z-10 flex flex-col items-center justify-center gap-10 text-center px-[5vw] mt-30">
+
+        <div className=" z-10 flex flex-col items-center justify-center gap-10 text-center px-[5vw] mt-10">
           <div className="w-full max-w-[95vw] sm:max-w-5xl rounded-3xl border-black border-4 shadow-lg p-2 bg-gray-700 overflow-hidden" >
             <div className="bg-gray-800 rounded-3xl font-mono text-sm text-primary/90 p-3 sm:p-4 md:p-6 space-y-4">
               <div className="bg-black border p-4 sm:p-6 border-primary/50 overflow-hidden shadow-lg crt">
@@ -48,26 +48,34 @@ export default function Home() {
                     <img
                       src="/image.png"
                       alt="Shrey Patel"
-                      className="rounded-md object-cover md:w-200 md:h-130"
+                      className="rounded-md object-cover md:w-100 md:h-130"
                     />
 
                   </div>
 
 
                   {/* Text Content */}
-                  <div className="fle flex-row">
-                    <div className="max-w-xl md:text-left text-center mb-16 ">
-                      <div className="flex-1 text-center md:text-left space-y-3 font-mono">
-                        <h1 className="text-2xl md:text-4xl font-bold text-green-400">Shrey Patel</h1>
-                        <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+                  <div className="fle flex-row " >
+                    <div className="max-w-xl md:text-left text-center md:mb-16 ">
+                      <div className="flex-1 text-center md:text-left space-y-3">
+                        <h1 className="text-2xl md:text-5xl font-bold text-green-400" style={{fontFamily:"var(--font-rubik-doodle-shadow)"}}>Shrey Patel</h1>
+                        <p className="text-gray-300 text-sm md:text-base leading-relaxed  ">
                           Computer Science student at the University of Manchester, passionate about hardware systems, dynamic programming, and full-stack web development.
                         </p>
-
+                        <div className="flex md:flex-row md:justify-start justify-center  mt-10 gap-5">
+                          <div className="flex flex-col items-center text-center">
+                            <a href="https://github.com/shrey-patel-05" target="_blank" className="text-gray-300 text-sm md:text-base underline"> <img src="/github.png" className="w-20 h-20"></img></a>
+                            <a href="https://github.com/shrey-patel-05" target="_blank" className="text-green-300 text-sm md:text-base underline"> Github</a>
+                          </div>      
+                            <div className="flex flex-col items-center text-center">
+                            <a href="https://github.com/shrey-patel-05" target="_blank" className="text-gray-300 text-sm md:text-base underline"> <img src="/cv.png" className="w-20 h-20"></img></a>
+                            <a href="https://github.com/shrey-patel-05" target="_blank" className="text-gray-300 text-sm md:text-base underline"> CV</a>
+                          </div>
+                        </div>
                       </div>
 
                     </div>
 
-                    <Image_Carasouel />
 
                   </div>
                 </div>
@@ -77,11 +85,12 @@ export default function Home() {
 
           </div>
         </div>
-      </div>
+
 
 
     </>
-
+);
+}
 
 
 
@@ -213,8 +222,7 @@ export default function Home() {
     //     </a>
     //   </footer>
     // </div>
-  );
-}
+  
 
 
 //  Venue Info
