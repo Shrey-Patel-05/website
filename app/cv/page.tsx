@@ -9,7 +9,7 @@ import PDFObject from "pdfobject";
 
 export default function Page() {
   useEffect(() => {
-    let customFallback = " <a href='[url]' download> Your browser does not support inline embedded PDFs. \n Click here to download the CV</a>";
+    const customFallback = " <a href='[url]' download> Your browser does not support inline embedded PDFs. \n Click here to download the CV</a>";
     PDFObject.embed("/cv.pdf", "#my-pdf", { fallbackLink: customFallback });
   }, []);
 
