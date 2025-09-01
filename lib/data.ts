@@ -1,19 +1,18 @@
-import postgres from 'postgres';
+import postgres, { Sql } from 'postgres';
 import { project } from './definitions';
-import { GitHub } from '@mui/icons-material';
 
 const connectionString = process.env.DATABASE_URL || process.env.POSTGRES_URL;
 
-let sql: any = null;
+// Use the correct Postgres type instead of 'any'
+let sql: Sql | null = null;
 
-// Don't throw error - use graceful fallback
 if (connectionString) {
   try {
     sql = postgres(connectionString, { 
       ssl: process.env.NODE_ENV === 'production' ? 'require' : 'allow' 
     });
   } catch (error) {
-    console.warn('Database connection failed, using fallback mode:', error);
+    console.warn('Database connection failed:', error);
   }
 } else {
   console.warn('No database connection string found. Using fallback mode for build.');
@@ -43,7 +42,7 @@ export async function fetchProjects(): Promise<project[]> {
             return mockProjects;
         }
         
-        const projects: project[] = await sql<project[]>`SELECT * FROM projects ORDER BY id ASC`;
+        const projects = await sql<project[]>`SELECT * FROM projects ORDER BY id ASC`;
         return projects;
     } catch (error) {
         console.error('Database Error:', error);
@@ -59,12 +58,18 @@ export async function fetchProjectByID(id?: string): Promise<project | null> {
     }
 
     try {
-        const projects: project[] = await sql<project[]>`
-      SELECT * FROM projects WHERE id = ${id}
-    `;
+        if (!sql) {
+            console.warn('No database connection available, using mock data');
+            return mockProjects.find(p => p.id === id) || null;
+        }
+        
+        const projects = await sql<project[]>`
+            SELECT * FROM projects WHERE id = ${id}
+        `;
         return projects[0] || null;
     } catch (error) {
         console.error('Database Error:', error);
-        throw new Error('Failed to fetch the latest projects.');
+        console.warn('Falling back to mock project data');
+        return mockProjects.find(p => p.id === id) || null;
     }
 }
