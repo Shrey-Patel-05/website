@@ -2,12 +2,11 @@
 
 
 @font-face {
-  font-family: "Conthrax";
-  src: url("/fonts/conthrax.otf") format("opentype");
+  font-family: 'Conthrax';
+  src: url('/fonts/Conthrax.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
-
 
 :root {
   --background: #000000; /* choose your desired color */
