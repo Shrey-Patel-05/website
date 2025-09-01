@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation'; 
 
 
 
@@ -39,6 +41,15 @@ const Image_Carasouel = ({ members }) => {
   //   return () => clearInterval(interval);
   // }, [members.length]);
 
+   const router = useRouter(); // Add this
+
+  // ... your existing state and functions ...
+
+  const handleProjectClick = (project) => {
+  // Navigate with project ID in URL
+  router.push(`/projects/projectinfo?id=${project.id}`);
+  };
+
   useEffect(() => {
     const handleResize = () => {
       setItemsToShow(window.innerWidth < 768 ? 1 : 2);
@@ -55,24 +66,23 @@ const Image_Carasouel = ({ members }) => {
 
   return (
     <section className="w-full  flex items-center justify-center">
-      <div className="  text-center px-4">
+      <div className="  text-center md:px-4 px-0">
         <div className="flex flex-col items-center justify-center">
           <div className="flex items-center justify-center w-full gap-4">
             {/* Left Arrow */}
-            <img className="p-4 w-20 h-20  mx-3  text-8xl font-light select-none  rounded-2xl hover:scale-105 transition-colors duration-300" src="/arrowpast.png" onClick={() => { goToPrevious() }}></img>
+            <img className="p-1 sm:p-4 w-12 h-12 sm:w-20 sm:h-20 flex-shrink-0 rounded-2xl hover:scale-105 transition-transform duration-300" src="/arrowpast.png" onClick={() => { goToPrevious() }}></img>
 
             {/* Image List */}
             {itemsToShow == 1 &&
 
-              <div className="flex-1 max-w-md mx-8">
+              <div className=" w-full max-w-full mx-auto ">
                 <div className="relative rounded-2xl shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
                   <img
                     src={members[plusSlides]?.image}
-                    className="w-full h-96 object-cover"
-                    loading="lazy"
+                    className="w-full h-70 object-cover"
                   />
-                  <div className="absolute bottom-0 left-0 right-0 bg-black/80 p-6">
-                    <h3 className="text-white font-bold text-xl mb-1">
+                  <div className="absolute bottom-0 left-0 right-0 bg-black/80 p-6 sm:hidden">
+                    <h3 className="text-white font-bold text-sm md:text-xl mb-1 overflow-ellipsis">
                       {members[plusSlides]?.name}
                     </h3>
                   </div>
@@ -94,12 +104,13 @@ const Image_Carasouel = ({ members }) => {
               >
                 {/* First Image */}
                 <ImageListItem>
-                  <div className="relative rounded-2xl overflow-hidden shadow-lg transform transition-transform duration-300 bg-white w-full h-full hover:scale-105 flex items-center justify-center ">
+                  <div className="relative rounded-2xl overflow-hidden shadow-lg transform transition-transform duration-300 bg-white w-full h-full hover:scale-105 flex items-center justify-center "
+                  onClick={() => handleProjectClick(members[plusSlides ])}
+                  >
                     <img
                       src={members[plusSlides]?.image}
                       alt={members[plusSlides]?.name || 'Member'}
                       className="max-w-full max-h-full w-full h-72 object-cover"
-                      loading="lazy"
                     />
                     <ImageListItemBar
                       style={{ height: '38%', fontFamily: 'var(--conthrax)' }}
@@ -113,19 +124,21 @@ const Image_Carasouel = ({ members }) => {
                 {/* Second Image */}
                 {plusSlides < members.length - 1 && (
                   <ImageListItem>
-                    <div className="relative rounded-2xl ml-5 overflow-hidden shadow-lg transform transition-transform duration-300 bg-white w-full h-full hover:scale-105 flex items-center justify-center">
-                      <img
-                        src={members[plusSlides + 1]?.image}
-                        alt={members[plusSlides + 1]?.name || 'Member'}
-                        className="max-w-full max-h-full w-full h-72 object-cover"
-                        loading="lazy"
-                      />
-                      <ImageListItemBar
-                        style={{ height: '38%', fontFamily: 'var(--conthrax)' }}
-                        className="absolute bottom-0 left-0 right-0 !bg-black/90 p-6 !rounded-b-2xl !text-3xl"
-                        title={members[plusSlides + 1]?.name}
-                        subtitle={members[plusSlides + 1]?.role}
-                      />
+                    <div className="relative rounded-2xl ml-5 overflow-hidden shadow-lg transform transition-transform duration-300 bg-white w-full h-full hover:scale-105 flex items-center justify-center"
+                     onClick={() => handleProjectClick(members[plusSlides +1 ])}
+                     >
+                      
+                        <img
+                          src={members[plusSlides + 1]?.image}
+                          alt={members[plusSlides + 1]?.name || 'Member'}
+                          className="max-w-full max-h-full w-full h-72 object-cover"
+                        />
+                        <ImageListItemBar
+                          style={{ height: '38%', fontFamily: 'var(--conthrax)' }}
+                          className="absolute bottom-0 left-0 right-0 !bg-black/90 p-6 !rounded-b-2xl !text-3xl"
+                          title={members[plusSlides + 1]?.name}
+                          subtitle={members[plusSlides + 1]?.role}
+                        />
                     </div>
                   </ImageListItem>
                 )}
@@ -136,7 +149,7 @@ const Image_Carasouel = ({ members }) => {
 
             {/* Right Arrow */}
 
-            <img className="p-4 w-20 h-20  mx-3 rotate-180 text-8xl font-light select-none  rounded-2xl hover:scale-105 transition-colors duration-300" src="/arrowpast.png" onClick={() => { goToNext() }}></img>
+            <img className="p-1 sm:p-4 w-12 h-12 sm:w-20 sm:h-20 flex-shrink-0  rotate-180 rounded-2xl hover:scale-105 transition-transform duration-300" src="/arrowpast.png" onClick={() => { goToNext() }}></img>
 
 
           </div>

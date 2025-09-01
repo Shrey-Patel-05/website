@@ -1,5 +1,6 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import "@/styles/Screen.css"
 import PDFObject from "pdfobject";
 
 // export default function PDFViewer() {
@@ -12,6 +13,13 @@ export default function Page() {
     const customFallback = " <a href='[url]' download> Your browser does not support inline embedded PDFs. \n Click here to download the CV</a>";
     PDFObject.embed("/cv.pdf", "#my-pdf", { fallbackLink: customFallback });
   }, []);
+
+   const [mounted, setMounted] = useState(false);
+  
+    useEffect(() => {
+      setMounted(true); // Only render content after client mount
+    }, []);
+  
 
   return (
     <div className="flex flex-col h-full overflow-auto">
