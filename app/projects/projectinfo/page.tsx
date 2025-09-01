@@ -6,6 +6,8 @@ type Props = {
   searchParams: { id: string | undefined } | Promise<{ id: string | undefined }>;
 };
 
+
+
 export default async function Page({ searchParams }: Props) {
   const { id } = await searchParams; // <-- await it here
 
