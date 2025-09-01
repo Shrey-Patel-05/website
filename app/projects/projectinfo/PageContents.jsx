@@ -17,21 +17,33 @@ const PageContents = ({ project }) => {
                 <div className="w-full max-w-[95vw] sm:max-w-5xl rounded-3xl border-black border-4 shadow-lg p-2 bg-gray-700 overflow-hidden" >
                     <div className="bg-gray-800 rounded-3xl font-mono text-sm text-primary/90 p-3 sm:p-4 md:p-6 space-y-4">
                         <div className="bg-black border p-4 sm:p-6 border-primary/50 overflow-hidden shadow-lg crt flex flex-col">
-                            <h1 className="text-4xl md:text-5xl font-bold text-green-400 mt-2" style={{ fontFamily: "var(--font-rubik-doodle-shadow)" }}>{project?.name}</h1>
+                            {/* Project Title */}
+                            <h1
+                                className="text-4xl md:text-6xl font-bold text-green-400 text-center drop-shadow-lg"
+                                style={{ fontFamily: "var(--font-rubik-doodle-shadow)" }}
+                            >
+                                {project?.name}
+                            </h1>
 
-                            <img
-                                src={project?.image}
-                                className="w-full h-full object-cover border-2 border-red-700 rounded-lg"
-                                style={{ boxShadow: '0 0 0 2px #ffffff' }}
-                            />
+                            {/* Project Image */}
+                            <div className="overflow-hidden rounded-xl border-2 border-red-700 shadow-lg">
+                                <img
+                                    src={project?.image}
+                                    alt={project?.name}
+                                    className="w-auto h-auto object-cover transition-transform duration-500 hover:scale-105"
+                                    style={{ boxShadow: "0 0 0 2px #ffffff" }}
+                                />
+                            </div>
 
-
-                            <p className="mb-20 mt-10 text-white text-2xl font-extrabold drop-shadow-[0_0_6px_rgba(0,255,0,0.7)]  ">
+                            {/* Project Description */}
+                            <p className="text-white text-xl md:text-2xl font-extrabold text-center drop-shadow-[0_0_8px_rgba(0,255,0,0.7)] leading-relaxed">
                                 {project?.description}
                             </p>
-                            <div className="mb-10"></div>
 
+                            {/* Optional Spacer */}
+                            <div className="h-10"></div>
                         </div>
+
                     </div>
                 </div>
             </div>
