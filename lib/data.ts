@@ -15,7 +15,7 @@ const sql = postgres(connectionString, {
 export async function fetchProjects(): Promise<project[]> {
     try {
         // Try to fetch from database
-        const projects: project[] = await sql<project[]>`SELECT * FROM projects ORDER BY id ASC`;
+        const projects: project[] = await sql<project[]>`SELECT id, name, image, description, github, link  FROM projects ORDER BY id ASC`;
         return projects;
     } catch (error) {
         console.error('Database Error:', error);
@@ -38,7 +38,7 @@ export async function fetchProjectByID(id?: string): Promise<project | null> {
 
     try {
         const projects: project[] = await sql<project[]>`
-      SELECT * FROM projects WHERE id = ${id}
+      SELECT id, name, image, description, github, link FROM projects WHERE id = ${id}
     `;
         return projects[0] || null;
     } catch (error) {

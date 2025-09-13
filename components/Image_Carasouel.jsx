@@ -76,7 +76,7 @@ const Image_Carasouel = ({ members }) => {
             {itemsToShow == 1 &&
 
               <div className=" w-full max-w-full mx-auto ">
-                <div className="relative rounded-2xl shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
+                <div className="relative rounded-2xl shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105" onClick={() => handleProjectClick(members[plusSlides ])}>
                   <img
                     src={members[plusSlides]?.image}
                     className="w-full h-70 object-cover"

@@ -55,7 +55,7 @@ const PageContents = ({ project }) => {
                                 <div className="flex flex-col items-start space-y-6">
 
                                     {/* Description */}
-                                    <div className="bg-gray-900/50 rounded-lg p-6 border border-green-400/20 w-full">
+                                    <div className="bg-gray-900/50 rounded-lg p-6 border border-green-400/20 w-full text-wrap overflow-y-auto">
                                         <h3 className="text-green-300 text-lg font-semibold mb-3 flex items-center">
                                             Project Description
                                         </h3>
@@ -88,11 +88,17 @@ const PageContents = ({ project }) => {
                                         <div className="px-8 mt-6 ">
                                             <div className="h-px bg-gradient-to-r from-transparent via-green-400/50 to-transparent"></div>
                                         </div>
+                                        <div className='flex flex-row items-center justify-center gap-20'>
+                                            {project?.github && <div className="flex flex-col items-center text-center mt-5">
+                                                <a href={project?.github} target="_blank" className="text-gray-300 text-sm md:text-base underline"> <img src="/github.png" className="w-20 h-20"></img></a>
+                                                <a href={project?.github} target="_blank" className="text-green-300 text-sm md:text-base underline"> Github</a>
+                                            </div>}
 
-                                        {project?.github && <div className="flex flex-col items-center text-center mt-5">
-                                            <a href={project?.github} target="_blank" className="text-gray-300 text-sm md:text-base underline"> <img src="/github.png" className="w-20 h-20"></img></a>
-                                            <a href={project?.github} target="_blank" className="text-green-300 text-sm md:text-base underline"> Github</a>
-                                        </div>}
+                                            {project?.link && <div className="flex flex-col items-center text-center mt-5">
+                                                <a href={project?.link} target="_blank" className="text-gray-300  rounded-full text-sm md:text-base underline"> <img src="/hyperlink.png" className="w-20 h-20"></img></a>
+                                                <a href={project?.link} target="_blank" className="text-blue-300 text-sm md:text-base underline"> View</a>
+                                            </div>}
+                                        </div>
                                     </div>
 
                                 </div>
