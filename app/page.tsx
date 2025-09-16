@@ -60,7 +60,7 @@ export default function Home() {
                       <div className="flex-1 text-center md:text-left space-y-3">
                         <h1 className="text-2xl md:text-5xl font-bold text-green-400" style={{fontFamily:"var(--font-rubik-doodle-shadow)"}}>Shrey Patel</h1>
                         <p className="text-gray-300 text-sm md:text-base leading-relaxed  ">
-                          Computer Science student at the University of Manchester, passionate about hardware systems, dynamic programming, and full-stack web development.
+                          Computer Science student at the University of Manchester, passionate about software engineering, computer vision, and full-stack web development.
                         </p>
                         <div className="flex md:flex-row md:justify-start justify-center  mt-10 gap-5">
                           <div className="flex flex-col items-center text-center">
