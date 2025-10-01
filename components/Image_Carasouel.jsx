@@ -13,6 +13,7 @@ const Image_Carasouel = ({ members }) => {
 
   const [plusSlides, setplusSlides] = useState(0);
   const [itemsToShow, setItemsToShow] = useState(2);
+   const [loaded, setLoaded] = useState(false);
 
   const goToPrevious = () => {
     setplusSlides((prev) => prev <= 0 ? Math.max(0, members.length - itemsToShow) : prev - 1);
@@ -79,6 +80,8 @@ const Image_Carasouel = ({ members }) => {
                 <div className="relative rounded-2xl shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105" onClick={() => handleProjectClick(members[plusSlides ])}>
                   <img
                     src={members[plusSlides]?.image}
+                    style={loaded ? {} : { display: 'none' }}
+                    onLoad={() => setLoaded(true)}
                     className="w-full h-70 object-cover"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-black/80 p-6 sm:hidden">
@@ -110,11 +113,14 @@ const Image_Carasouel = ({ members }) => {
                     <img
                       src={members[plusSlides]?.image}
                       alt={members[plusSlides]?.name || 'Member'}
+                      style={loaded ? {} : { display: 'none' }}
+                      onLoad={() => setLoaded(true)}
                       className="max-w-full max-h-full w-full h-72 object-cover"
                     />
                     <ImageListItemBar
                       style={{ height: '38%', fontFamily: 'var(--conthrax)' }}
                       className="absolute bottom-0 left-0 right-0 !bg-black/90 p-6 !rounded-b-2xl !text-3xl"
+                      
                       title={members[plusSlides]?.name}
                       subtitle={members[plusSlides]?.role}
                     />
@@ -131,6 +137,8 @@ const Image_Carasouel = ({ members }) => {
                         <img
                           src={members[plusSlides + 1]?.image}
                           alt={members[plusSlides + 1]?.name || 'Member'}
+                          style={loaded ? {} : { display: 'none' }}
+                          onLoad={() => setLoaded(true)}
                           className="max-w-full max-h-full w-full h-72 object-cover"
                         />
                         <ImageListItemBar
